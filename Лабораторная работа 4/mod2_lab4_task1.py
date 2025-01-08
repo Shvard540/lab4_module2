@@ -1,9 +1,25 @@
 class Games:
-    '''класс "игры" '''
+    '''
+    класс "игры"
+    '''
 
     def __init__(self, quality: str, price: float):
+        '''
+        инициализация экземпляра класса
+
+        :param quality: качество игры
+        :param price: цена игры
+        '''
         self.quality = quality
         self.price = price
+
+        if not isinstance(quality, str):
+            raise TypeErrror("Качество может быть только строкой str")
+        elif not isinstance(price, float):
+            raise TypeErrror("Цена может быть только числом типа float")
+        elif price < 0:
+            raise ValueErrror("Цена не может быть отрицательной")
+            
 
     def __str__(self) -> str:
         return f"Данные об игре: цена {self.price}, качество {self.quality}"
@@ -12,14 +28,17 @@ class Games:
         return f"{self.__class__.__name__}(price={self.price!r}, quality={self.quality!r})"
 
     def show_shop_price(self) -> str:
-        '''показывает цену с магазинной накидкой'''
+        '''
+        показывает цену с магазинной накидкой
+        '''
         return f"Цена в магазинах (при 3%): {self.price * 1.03}"
 
     def characteristics(self, extra=None) -> str:
         '''
         выводит список значений класса.
+        :param extra: доп параметр (для подклассов)
         ---
-        перегрузил так как классы имеют свои
+        перегрузил так как подклассы имеют свои
         частные параметры
         '''
         if extra != None:
@@ -29,13 +48,31 @@ class Games:
 
 
 class Boardgames(Games):
-    '''подкласс "настольные игры"'''
+    '''
+    подкласс "настольные игры"
+    '''
 
     def __init__(self, quality: str, price: float, material: str):
+        '''
+        инициализация экземпляра подкласса
+
+        :param quality: качество игры
+        :param price: цена игры
+        :param material: материал, из чего изготовлен
+        '''
         super().__init__(quality, price)
         self.quality = quality
         self.price = price
         self.material = material
+
+        if not isinstance(quality, str):
+            raise TypeErrror("Качество может быть только строкой str")
+        elif not isinstance(price, float):
+            raise TypeErrror("Цена может быть только числом типа float")
+        elif price < 0:
+            raise ValueErrror("Цена не может быть отрицательной")
+        elif not isinstance(material, str):
+            raise TypeErrror("Материал может быть только строкой str")
 
     def __str__(self) -> str:
         return f"{super.__str__()}" + f", материал {self.material}"
@@ -45,13 +82,33 @@ class Boardgames(Games):
 
 
 class Computergames(Games):
-    '''подкласс "компьютерные игры"'''
+    '''
+    подкласс "компьютерные игры"
+    '''
 
     def __init__(self, quality: str, price: float, data_size: int):
+        '''
+        инициализация экземпляра подкласса
+
+        :param quality: качество игры
+        :param price: цена игры
+        :param data_size: объем данных игры
+        '''
         super().__init__(quality, price)
         self.quality = quality
         self.price = price
         self.data_size = data_size
+
+        if not isinstance(quality, str):
+            raise TypeErrror("Качество может быть только строкой str")
+        elif not isinstance(price, float):
+            raise TypeErrror("Цена может быть только числом типа float")
+        elif price < 0:
+            raise ValueErrror("Цена не может быть отрицательной")
+        elif not isinstance(data_size, int):
+            raise TypeErrror("Объем данных может быть только числом типа int")
+        elif data_size < 0:
+            raise ValueErrror("Объем данных не может быть отрицательным")
 
     def __str__(self) -> str:
         return f"{super.__str__()}" + f", объем данных {self.data_size}"
