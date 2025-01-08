@@ -22,12 +22,10 @@ class Games:
         перегрузил так как классы имеют свои
         частные параметры
         '''
-
         if extra != None:
-            res = f'{self.quality}' + " " + f'{self.price}' + " " + f'{extra}'
+            print (f'{self.quality}' + " " + f'{self.price}' + " " + f'{extra}')
         else:
-            res = f'{self.quality}' + " " + f'{self.price}'
-        print(res)
+            print(f'{self.quality}' + " " + f'{self.price}')
 
 
 class Boardgames(Games):
